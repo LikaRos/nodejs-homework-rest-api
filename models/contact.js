@@ -42,7 +42,7 @@ const schemas = {
   updateFavoriteSchema,
 };
 
-const Contact = model("contact", "contactSchema");
+const Contact = model("contact", contactSchema);
 
 module.exports = {
   Contact,
