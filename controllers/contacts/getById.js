@@ -4,8 +4,8 @@ const { RequestError } = require("../../helpers");
 
 const getById = async (req, res) => {
   const { id } = req.params;
-  // const result = await Book.findOne({ _id: id });
-  const result = await Book.findById(id);
+  // const result = await Contact.findOne({ _id: id });
+  const result = await Contact.findById(id);
   if (!result) {
     throw RequestError(404);
   }

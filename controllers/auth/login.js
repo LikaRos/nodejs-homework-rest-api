@@ -28,6 +28,8 @@ const login = async (req, res) => {
 
   res.json({
     token,
+    email: result.email,
+    subscription: result.subscription.enum,
   });
 };
 
