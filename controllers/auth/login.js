@@ -1,5 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const { User } = require("../../models/user");
 
@@ -28,8 +30,6 @@ const login = async (req, res) => {
 
   res.json({
     token,
-    email: result.email,
-    subscription: result.subscription.enum,
   });
 };
 

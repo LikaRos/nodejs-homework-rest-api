@@ -4,7 +4,7 @@ const ctrl = require("../../controllers/auth");
 
 const { ctrlWrapper } = require("../../helpers");
 
-const { validateBody } = require("../../middlewares");
+const { validateBody, authenticate, upload } = require("../../middlewares");
 
 const { schemas } = require("../../models/user");
 
@@ -14,7 +14,7 @@ const router = express.Router();
 router.post(
   "/users/signup",
   validateBody(schemas.registerSchema),
-  ctrlWrapper(ctrl.register)
+  ctrlWrapper(ctrl.signup)
 );
 
 // signin
@@ -24,8 +24,15 @@ router.post(
   ctrlWrapper(ctrl.login)
 );
 
-router.get("/current", ctrlWrapper(ctrl.getCurrent));
+router.get("/users/current", authenticate, ctrlWrapper(ctrl.getCurrent));
 
-router.get("/logout", ctrlWrapper(ctrl.logout));
+router.get("/users/logout", authenticate, ctrlWrapper(ctrl.logout));
+
+router.patch(
+  "/users/avatars",
+  authenticate,
+  upload.single("avatar"),
+  ctrlWrapper(ctrl.avatarUpdate)
+);
 
 module.exports = router;

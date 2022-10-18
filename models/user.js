@@ -1,7 +1,7 @@
 const Joi = require("joi");
 const { Schema, model } = require("mongoose");
 
-const handleMongooseSchemaError = require("../middlewares/handleMongooseSchemaError");
+const handleMongooseSchemaError = require("../helpers/handleMongooseSchemaError");
 //модель користувача
 const userSchema = new Schema(
   {
@@ -24,7 +24,7 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-
+    avatarURL: String,
     token: {
       type: String,
       default: null,
