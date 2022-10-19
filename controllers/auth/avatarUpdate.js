@@ -9,10 +9,13 @@ const avatarUpdate = async (req, res) => {
     const { _id } = req.user;
 
     const { path: tempUpload, originalname } = req.file;
+    const extention = originalname.split(".").pop();
+    // const [extention] = originalname.split(".").reverse()
+    const filename = `${_id}.${extention}`;
     const resultUpload = path.join(avatarDir, filename);
     await fs.rename(tempUpload, resultUpload);
     const avatarURL = path.join("avatars", filename);
-    await User.findByIdAndUpdate(_id, { avatarURL });
+    await User.findByIdAndUpdate(_id, { avatarURL: avatarDir });
     res.json({
       avatarURL,
     });
@@ -21,22 +24,5 @@ const avatarUpdate = async (req, res) => {
     throw error;
   }
 };
-
-// const avatarUpdate = async (req, res) => {
-// 	try {
-// 		const { _id } = req.user;
-
-//   			const avatar = path.join("public", "avatars", originalname);
-//   			const result = await User.findByIdAndUpdate(_id, { avatarUrl: avatar });
-// 	}
-
-//   const { _id } = req.user;
-//   const avatar = path.join("public", "avatars", originalname);
-//   const result = await User.findByIdAndUpdate(_id, { avatarUrl: avatar });
-//   if (!result) {
-//     throw RequestError(401);
-//   }
-//   res.json(result);
-// };
 
 module.exports = avatarUpdate;
