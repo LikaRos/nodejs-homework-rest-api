@@ -1,3 +1,4 @@
+const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 
 const express = require("express");
