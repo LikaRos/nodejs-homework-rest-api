@@ -5,7 +5,7 @@ const { nanoid } = require("nanoid");
 
 const { User } = require("../../models/user");
 
-const { RequestError } = require("../../helpers");
+const { RequestError, createVerifyEmail } = require("../../helpers");
 
 const register = async (req, res) => {
   const { name, email, password } = req.body;
